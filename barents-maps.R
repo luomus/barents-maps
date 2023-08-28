@@ -318,8 +318,8 @@ for (i in locale) {
 # )
 #
 # occ_download_wait(her_per_dwnld)
-#
-# her_per_data <- occ_download_import(occ_download_get("0062695-230530130749713"))
+
+her_per_data <- occ_download_import(occ_download_get("0062695-230530130749713"))
 
 her_per_data <- st_as_sf(
   her_per_data, coords = c("decimalLongitude", "decimalLatitude"),
