@@ -19,7 +19,7 @@ url <- param_set(url, "request", "GetMap")
 url <- param_set(url, "width", 768)
 url <- param_set(url, "height", 365)
 url <- param_set(url, "bbox", url_encode("11,61,32,72"))
-url <- param_set(url, "layers", url_encode("LajiMapData:Barents Region"))
+url <- param_set(url, "layers", url_encode("LajiMapData:barentsRegion2"))
 url <- param_set(url, "format", "geojson")
 
 barents_map <- st_read(url)
