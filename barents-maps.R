@@ -42,7 +42,8 @@ bbox <- st_as_text(st_as_sfc(round(st_bbox(barents_map)) - c(1, 1, 0, -1)))
 locale <- list(
   c(lang = "en", n = "Individuals"),
   c(lang = "fi", n = "Yksilömäärä"),
-  c(lang = "sv", n = "Individer")
+  c(lang = "sv", n = "Individer"),
+  c(lang = "se", n = "Individuálamearri")
 )
 
 # onc_gor <- name_backbone("Oncorhynchus gorbuscha")
