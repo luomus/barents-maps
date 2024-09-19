@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.3.1",
+    "Version": "4.4.1",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -85,14 +85,13 @@
     },
     "Rcpp": {
       "Package": "Rcpp",
-      "Version": "1.0.11",
+      "Version": "1.0.13",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "methods",
         "utils"
-      ],
-      "Hash": "ae6cbbe1492f4de79c45fce06f967ce8"
+      ]
     },
     "askpass": {
       "Package": "askpass",
@@ -221,24 +220,22 @@
     },
     "curl": {
       "Package": "curl",
-      "Version": "5.1.0",
+      "Version": "5.2.2",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R"
-      ],
-      "Hash": "9123f3ef96a2c1a93927d828b2fe7d4c"
+      ]
     },
     "data.table": {
       "Package": "data.table",
-      "Version": "1.14.8",
+      "Version": "1.16.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "methods"
-      ],
-      "Hash": "b4c06e554f33344e044ccd7fdca750a9"
+      ]
     },
     "dplyr": {
       "Package": "dplyr",
@@ -265,7 +262,7 @@
     },
     "e1071": {
       "Package": "e1071",
-      "Version": "1.7-13",
+      "Version": "1.7-16",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -277,7 +274,7 @@
         "stats",
         "utils"
       ],
-      "Hash": "1046cb48d06cb40c2900d8878f03a0fe"
+      "Hash": "27a09ca40266a1066d62ef5402dd51d6"
     },
     "fansi": {
       "Package": "fansi",
@@ -435,13 +432,12 @@
     },
     "jsonlite": {
       "Package": "jsonlite",
-      "Version": "1.8.7",
+      "Version": "1.8.8",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "methods"
-      ],
-      "Hash": "266a20443ca13c65688b2116d5220f76"
+      ]
     },
     "labeling": {
       "Package": "labeling",
@@ -494,10 +490,9 @@
     },
     "lpSolve": {
       "Package": "lpSolve",
-      "Version": "5.6.19",
+      "Version": "5.6.21",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "1dde7a359a18e255a35e0ae09d034be9"
+      "Repository": "CRAN"
     },
     "magrittr": {
       "Package": "magrittr",
@@ -675,13 +670,12 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "1.0.3",
+      "Version": "1.0.7",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "utils"
-      ],
-      "Hash": "41b847654f567341725473431dd0d5ab"
+      ]
     },
     "rgbif": {
       "Package": "rgbif",
@@ -707,14 +701,14 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.1.1",
+      "Version": "1.1.4",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "utils"
       ],
-      "Hash": "a85c767b55f0bf9b7ad16c6d7baee5bb"
+      "Hash": "3eec01f8b1dee337674b2e34ab1f9bc1"
     },
     "s2": {
       "Package": "s2",
@@ -748,7 +742,7 @@
     },
     "sf": {
       "Package": "sf",
-      "Version": "1.0-14",
+      "Version": "1.0-17",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -766,8 +760,7 @@
         "tools",
         "units",
         "utils"
-      ],
-      "Hash": "e2111252a76984ca50bf8d6314348681"
+      ]
     },
     "stringi": {
       "Package": "stringi",
@@ -905,14 +898,13 @@
     },
     "units": {
       "Package": "units",
-      "Version": "0.8-4",
+      "Version": "0.8-5",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "Rcpp"
-      ],
-      "Hash": "e0fbcea25008a7540c83c2c294135de0"
+      ]
     },
     "urltools": {
       "Package": "urltools",
@@ -983,24 +975,22 @@
     },
     "wk": {
       "Package": "wk",
-      "Version": "0.9.0",
+      "Version": "0.9.3",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R"
-      ],
-      "Hash": "f58cfa8d9c3a78a309d455a647dee853"
+      ]
     },
     "xml2": {
       "Package": "xml2",
-      "Version": "1.3.5",
+      "Version": "1.3.6",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "methods"
-      ],
-      "Hash": "6c40e5cfcc6aefd88110666e18c31f40"
+      ]
     }
   }
 }
