@@ -46,60 +46,60 @@ locale <- list(
   c(lang = "se", n = "Individuálamearri")
 )
 
-# onc_gor <- name_backbone("Oncorhynchus gorbuscha")
+# imp_gla <- name_backbone("Impatiens glandulifera")
 #
-# onc_gor_key <- onc_gor[[1, "usageKey"]]
+# imp_gla_key <- imp_gla[[1, "usageKey"]]
 #
-# onc_gor_dwnld <- occ_download(
+# imp_gla_dwnld <- occ_download(
 #   type="and",
-#   pred("taxonKey", onc_gor_key),
+#   pred("taxonKey", imp_gla_key),
 #   pred("hasGeospatialIssue", FALSE),
 #   pred("hasCoordinate", TRUE),
-#   pred("occurrenceStatus","PRESENT"),
+#   pred("occurrenceStatus", "PRESENT"),
 #   pred_gte("year", 1900),
-#   pred_not(pred_in("basisOfRecord",c("FOSSIL_SPECIMEN","LIVING_SPECIMEN"))),
+#   pred_not(pred_in("basisOfRecord", c("FOSSIL_SPECIMEN", "LIVING_SPECIMEN"))),
 #   pred_within(bbox),
 #   pred_or(
-#     pred_lt("coordinateUncertaintyInMeters",10000),
+#     pred_lt("coordinateUncertaintyInMeters", 10000),
 #     pred_isnull("coordinateUncertaintyInMeters")
 #   ),
 #   format = "SIMPLE_CSV"
 # )
 #
-# occ_download_wait(onc_gor_dwnld)
+# occ_download_wait(imp_gla_dwnld)
 
-onc_gor_data <- occ_download_import(occ_download_get("0060246-230530130749713"))
+imp_gla_data <- occ_download_import(occ_download_get("0021354-240906103802322"))
 
-onc_gor_data <- st_as_sf(
-  onc_gor_data, coords = c("decimalLongitude", "decimalLatitude"),
+imp_gla_data <- st_as_sf(
+  imp_gla_data, coords = c("decimalLongitude", "decimalLatitude"),
   crs = "EPSG:4326"
 )
 
-onc_gor_data <- st_filter(onc_gor_data, st_buffer(barents_map, 10000))
+imp_gla_data <- st_filter(imp_gla_data, st_buffer(barents_map, 10000))
 
-onc_gor_data <- mutate(
-  onc_gor_data,
+imp_gla_data <- mutate(
+  imp_gla_data,
   year = factor(year, levels = c(seq.int(min(year), max(year)), "All Years")),
   Individuals = cut(
     replace_na(individualCount, 1),
-    c(0, 9, 99, 999, 999999),
+    c(0, 9, 99, 999, 9999999),
     c("<10", "10-99", "100-999", ">999")
   )
 )
 
-onc_gor_data <- bind_rows(
-  onc_gor_data,
-  mutate(onc_gor_data, year = factor("All Years", levels = levels(year)))
+imp_gla_data <- bind_rows(
+  imp_gla_data,
+  mutate(imp_gla_data, year = factor("All Years", levels = levels(year)))
 )
 
 for (i in locale) {
 
-  onc_gor_gg <-
+  imp_gla_gg <-
     ggplot(barents_map) +
     geom_sf(color = "grey25", fill = "grey90") +
     geom_sf_text(aes(label = shapeName)) +
     geom_sf(
-      data = onc_gor_data,
+      data = imp_gla_data,
       aes(group = year, color = Individuals, size = Individuals)
     ) +
     scale_color_viridis_d() +
@@ -111,20 +111,99 @@ for (i in locale) {
     ) +
     transition_states(year, wrap = FALSE) +
     labs(
-      title = "{closest_state}", subtitle = "Oncorhynchus gorbuscha",
+      title = "{closest_state}", subtitle = "Impatiens glandulifera",
       x = NULL, y = NULL, color = i[["n"]], size = i[["n"]]
     )
 
   anim_save(
-    sprintf("onc-gor-%s.webm", i[["lang"]]),
+    sprintf("imp-gla-%s.webm", i[["lang"]]),
     animate(
-      onc_gor_gg, nframes = nlevels(onc_gor_data$year) * 5, fps = 10,
-      renderer = av_renderer(), end_pause = nlevels(onc_gor_data$year) * .5
+      imp_gla_gg, nframes = nlevels(imp_gla_data$year) * 5, fps = 10,
+      renderer = av_renderer(), end_pause = nlevels(imp_gla_data$year) * .5
     )
   )
 
 }
 
+# onc_gor <- name_backbone("Oncorhynchus gorbuscha")
+#
+# onc_gor_key <- onc_gor[[1, "usageKey"]]
+#
+# onc_gor_dwnld <- occ_download(
+#   type="and",
+#   pred("taxonKey", onc_gor_key),
+#   pred("hasGeospatialIssue", FALSE),
+#   pred("hasCoordinate", TRUE),
+#   pred("occurrenceStatus", "PRESENT"),
+#   pred_gte("year", 1900),
+#   pred_not(pred_in("basisOfRecord", c("FOSSIL_SPECIMEN", "LIVING_SPECIMEN"))),
+#   pred_within(bbox),
+#   pred_or(
+#     pred_lt("coordinateUncertaintyInMeters", 10000),
+#     pred_isnull("coordinateUncertaintyInMeters")
+#   ),
+#   format = "SIMPLE_CSV"
+# )
+#
+# occ_download_wait(onc_gor_dwnld)
+#
+# onc_gor_data <- occ_download_import(occ_download_get("0021364-240906103802322"))
+#
+# onc_gor_data <- st_as_sf(
+#   onc_gor_data, coords = c("decimalLongitude", "decimalLatitude"),
+#   crs = "EPSG:4326"
+# )
+#
+# onc_gor_data <- st_filter(onc_gor_data, st_buffer(barents_map, 10000))
+#
+# onc_gor_data <- mutate(
+#   onc_gor_data,
+#   year = factor(year, levels = c(seq.int(min(year), max(year)), "All Years")),
+#   Individuals = cut(
+#     replace_na(individualCount, 1),
+#     c(0, 9, 99, 999, 999999),
+#     c("<10", "10-99", "100-999", ">999")
+#   )
+# )
+#
+# onc_gor_data <- bind_rows(
+#   onc_gor_data,
+#   mutate(onc_gor_data, year = factor("All Years", levels = levels(year)))
+# )
+#
+# for (i in locale) {
+#
+#   onc_gor_gg <-
+#     ggplot(barents_map) +
+#     geom_sf(color = "grey25", fill = "grey90") +
+#     geom_sf_text(aes(label = shapeName)) +
+#     geom_sf(
+#       data = onc_gor_data,
+#       aes(group = year, color = Individuals, size = Individuals)
+#     ) +
+#     scale_color_viridis_d() +
+#     theme_minimal() +
+#     theme(
+#       plot.title = element_text(vjust = -25),
+#       plot.subtitle = element_text(vjust = -15, face = "italic"),
+#       legend.position = c(.1, .15)
+#     ) +
+#     transition_states(year, wrap = FALSE) +
+#     labs(
+#       title = "{closest_state}", subtitle = "Oncorhynchus gorbuscha",
+#       x = NULL, y = NULL, color = i[["n"]], size = i[["n"]]
+#     )
+#
+#   anim_save(
+#     sprintf("onc-gor-%s.webm", i[["lang"]]),
+#     animate(
+#       onc_gor_gg, nframes = nlevels(onc_gor_data$year) * 5, fps = 10,
+#       renderer = av_renderer(), end_pause = nlevels(onc_gor_data$year) * .5
+#     )
+#   )
+#
+# }
+#
 # lup_pol <- name_backbone("Lupinus polyphyllus")
 #
 # lup_pol_key <- lup_pol[[1, "usageKey"]]
@@ -134,12 +213,12 @@ for (i in locale) {
 #   pred("taxonKey", lup_pol_key),
 #   pred("hasGeospatialIssue", FALSE),
 #   pred("hasCoordinate", TRUE),
-#   pred("occurrenceStatus","PRESENT"),
+#   pred("occurrenceStatus", "PRESENT"),
 #   pred_gte("year", 1900),
-#   pred_not(pred_in("basisOfRecord", c("FOSSIL_SPECIMEN","LIVING_SPECIMEN"))),
+#   pred_not(pred_in("basisOfRecord", c("FOSSIL_SPECIMEN", "LIVING_SPECIMEN"))),
 #   pred_within(bbox),
 #   pred_or(
-#     pred_lt("coordinateUncertaintyInMeters",10000),
+#     pred_lt("coordinateUncertaintyInMeters", 10000),
 #     pred_isnull("coordinateUncertaintyInMeters")
 #   ),
 #   format = "SIMPLE_CSV"
@@ -147,7 +226,7 @@ for (i in locale) {
 #
 # occ_download_wait(lup_pol_dwnld)
 
-lup_pol_data <- occ_download_import(occ_download_get("0060596-230530130749713"))
+lup_pol_data <- occ_download_import(occ_download_get("0021368-240906103802322"))
 
 lup_pol_data <- st_as_sf(
   lup_pol_data, coords = c("decimalLongitude", "decimalLatitude"),
@@ -214,12 +293,12 @@ for (i in locale) {
 #   pred("taxonKey", lup_noo_key),
 #   pred("hasGeospatialIssue", FALSE),
 #   pred("hasCoordinate", TRUE),
-#   pred("occurrenceStatus","PRESENT"),
+#   pred("occurrenceStatus", "PRESENT"),
 #   pred_gte("year", 1900),
-#   pred_not(pred_in("basisOfRecord", c("FOSSIL_SPECIMEN","LIVING_SPECIMEN"))),
+#   pred_not(pred_in("basisOfRecord", c("FOSSIL_SPECIMEN", "LIVING_SPECIMEN"))),
 #   pred_within(bbox),
 #   pred_or(
-#     pred_lt("coordinateUncertaintyInMeters",10000),
+#     pred_lt("coordinateUncertaintyInMeters", 10000),
 #     pred_isnull("coordinateUncertaintyInMeters")
 #   ),
 #   format = "SIMPLE_CSV"
@@ -227,7 +306,7 @@ for (i in locale) {
 #
 # occ_download_wait(lup_noo_dwnld)
 
-lup_noo_data <- occ_download_import(occ_download_get("0062518-230530130749713"))
+lup_noo_data <- occ_download_import(occ_download_get("0021370-240906103802322"))
 
 lup_noo_data <- st_as_sf(
   lup_noo_data, coords = c("decimalLongitude", "decimalLatitude"),
@@ -309,10 +388,10 @@ for (i in locale) {
 #   pred("hasCoordinate", TRUE),
 #   pred("occurrenceStatus","PRESENT"),
 #   pred_gte("year", 1900),
-#   pred_not(pred_in("basisOfRecord", c("FOSSIL_SPECIMEN","LIVING_SPECIMEN"))),
+#   pred_not(pred_in("basisOfRecord", c("FOSSIL_SPECIMEN", "LIVING_SPECIMEN"))),
 #   pred_within(bbox),
 #   pred_or(
-#     pred_lt("coordinateUncertaintyInMeters",10000),
+#     pred_lt("coordinateUncertaintyInMeters", 10000),
 #     pred_isnull("coordinateUncertaintyInMeters")
 #   ),
 #   format = "SIMPLE_CSV"
@@ -320,7 +399,7 @@ for (i in locale) {
 #
 # occ_download_wait(her_per_dwnld)
 
-her_per_data <- occ_download_import(occ_download_get("0062695-230530130749713"))
+her_per_data <- occ_download_import(occ_download_get("0021374-240906103802322"))
 
 her_per_data <- st_as_sf(
   her_per_data, coords = c("decimalLongitude", "decimalLatitude"),
